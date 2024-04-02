@@ -80,6 +80,23 @@ void insertTengahKota (char nilai[], char cari[], kota **first) {
     }
 }
 
+void insertKota(char nilai[], kota **first) {
+    kota *newNode, *temp, *temp2;
+    cekAlokasiKota(nilai, &newNode);
+    
+    if (*first == NULL || strcmp((*first)->info, nilai) >= 0) {
+        insertAwalKota(nilai, first);
+    } else {
+        temp = *first;
+        while (temp != NULL && strcmp(temp->info, nilai) < 0) {
+            temp2 = temp;
+            temp = temp->nk;
+        }
+        newNode->nk = temp;
+        temp2->nk = newNode;
+    }
+}
+
 anggota* searchingAnggota (char cari[], kota *cariKota) {
     anggota *temp;
     temp = cariKota->np;
@@ -173,9 +190,9 @@ void printListAnggota (kota *cariKota) {
     printf("NULL\n");
 }
 
-int jumlahKota (kota first)
+int jumlahKota (kota *first)
 {
-    kotatemp;
+    kota *temp;
     int jumlahKota;
     temp = first;
     jumlahKota = 0;

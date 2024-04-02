@@ -27,6 +27,7 @@ void cekAlokasiAnggota(char nilai[], infotype usia, anggota **newNode); // Aloka
 void insertAwalKota(char nilai[], kota **first);
 void insertAkhirKota(char nilai[], kota **first);
 void insertTengahKota (char nilai[], char cari[], kota **first);
+void insertKota(char nilai[], kota **first);
 
 // Insert Anggota
 void insertAwalAnggota (char nilai[], infotype usia, kota *cariKota);
