@@ -27,10 +27,17 @@ void cekAlokasiAnggota(char nilai[], infotype usia, anggota **newNode); // Aloka
 void insertAwalKota(char nilai[], kota **first);
 void insertAkhirKota(char nilai[], kota **first);
 void insertTengahKota (char nilai[], char cari[], kota **first);
-void printListKota (kota **first);
+
+// Insert Anggota
+void insertAwalAnggota (char nilai[], infotype usia, kota *cariKota);
+
+// Print List
+void printListKota (kota *first);
+void printListAnggota (kota *cariKota);
 
 // Searching
-kota* searchingKota(char cari[], kota **first);
+kota* searchingKota(char cari[], kota *first);
+anggota* searchingAnggota (char cari[], kota *cariKota);
 
 
 #endif /* LINKEDLIST_H */
