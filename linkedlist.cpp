@@ -172,3 +172,17 @@ void printListAnggota (kota *cariKota) {
     }
     printf("NULL\n");
 }
+
+int jumlahKota (kota first)
+{
+    kotatemp;
+    int jumlahKota;
+    temp = first;
+    jumlahKota = 0;
+    while (temp != NULL)
+    {
+        temp = temp->nk;
+        jumlahKota++;
+    }
+    return jumlahKota;
+}

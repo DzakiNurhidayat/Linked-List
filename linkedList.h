@@ -42,5 +42,7 @@ void printListAnggota (kota *cariKota);
 kota* searchingKota(char cari[], kota *first);
 anggota* searchingAnggota (char cari[], kota *cariKota);
 
+// Jumlah
+int jumlahKota (kota *first);
 
 #endif /* LINKEDLIST_H */

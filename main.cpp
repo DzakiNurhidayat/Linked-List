@@ -1,6 +1,7 @@
 #include "linkedList.h"
 
 int main () {
+    int sumKota;
     kota *temp;
     char nilai[100];
     kota *first = NULL;
@@ -24,4 +25,6 @@ int main () {
     printListAnggota(temp);
     deleteAnggota ("Restu", temp);
     printListAnggota(temp);
+
+    sumKota = jumlahKota(first);
 }
