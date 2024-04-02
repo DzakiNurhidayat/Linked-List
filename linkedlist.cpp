@@ -1,6 +1,5 @@
 #include "linkedList.h"
 
-
 void cekAlokasiKota (char nilai[], kota **newNode) {
     *newNode = (kota *) malloc(sizeof(kota));
     if (*newNode == NULL) {
@@ -8,6 +7,7 @@ void cekAlokasiKota (char nilai[], kota **newNode) {
     } else {
         strcpy((*newNode)->info, nilai);
         (*newNode)->nk = NULL;
+        (*newNode)->np = NULL;
     }
 }
 
@@ -31,7 +31,6 @@ void insertAwalKota (char nilai[], kota **first) {
         newNode->nk = *first;
     }
     *first = newNode;
-    newNode->np = NULL;
 }
 
 void insertAkhirKota (char nilai[], kota **first) {
@@ -46,14 +45,45 @@ void insertAkhirKota (char nilai[], kota **first) {
             temp = temp->nk;
         }
         temp->nk = newNode;
-        
     }
-    newNode->np = NULL;
+}
+
+kota* searchingKota(char cari[], kota *first) {
+    kota *temp;
+    temp = first;
+    while (temp != NULL) {
+        if (strcmp(temp->info, cari) == 0) {
+            return temp;
+        } else {
+            temp = temp->nk;
+        }
+    }
+    return NULL;
+}
+
+void insertTengahKota (char nilai[], char cari[], kota **first) {
+    kota *newNode, *temp;
+    cekAlokasiKota(nilai, &newNode);
+    if (*first == NULL) {
+        *first = newNode;
+    } else {
+        temp = searchingKota(cari, *first);
+        if (temp != NULL)
+        {
+            newNode->nk = temp->nk;
+            temp->nk = newNode;
+        }
+        else
+        {
+            printf("Nilai yang dicari tidak ada \n");
+        }
+    }
 }
 
 void printListKota (kota **first) {
     kota *temp;
     int i = 1;
+    temp = *first;
     if (temp != NULL)
     {
         while (temp->nk != NULL)
