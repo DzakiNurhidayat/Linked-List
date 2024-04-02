@@ -80,17 +80,15 @@ void insertTengahKota (char nilai[], char cari[], kota **first) {
     }
 }
 
-anggota* searchingAnggota (char cari[], kota *first) {
-    kota *temp;
-    anggota *kotaMana;
-    temp = searchingKota(cari, first);
-    kotaMana = temp->np;
+anggota* searchingAnggota (char cari[], kota *cariKota) {
+    anggota *temp;
+    temp = cariKota->np;
     while (temp != NULL)
     {
-        if (strcmp(kotaMana->info, cari) == 0) {
-            return kotaMana;
+        if (strcmp(temp->info, cari) == 0) {
+            return temp;
         } else {
-            kotaMana = kotaMana->next;
+            temp = temp->next;
         }
     }
     return NULL;
@@ -106,6 +104,37 @@ void insertAwalAnggota (char nilai[], infotype usia, kota *cariKota) {
         newNode->next = temp;
         cariKota->np = newNode;
     }
+}
+
+char* deleteAnggota (char nodeHapus[], kota *cariKota) {
+    anggota *temp, *nodeDelete;
+    char *nilai = (char*)malloc(sizeof(char) * 100);
+    nodeDelete = searchingAnggota(nodeHapus, cariKota);
+    if (nodeDelete == NULL)
+    {
+        printf("Node yang akan dihapus tidak ditemukan\n");
+        return NULL;
+    }
+    else {
+        if (cariKota->np == nodeDelete) {
+            cariKota->np = nodeDelete->next;
+        }
+        else {
+            temp = cariKota->np;
+            while (temp != NULL && temp->next != nodeDelete)
+            {
+                temp = temp->next;
+            }
+            if (temp != NULL)
+            {
+                temp->next = nodeDelete->next;
+            }
+        }
+        strcpy(nilai, nodeDelete->info);
+        nodeDelete->next = NULL;
+        free(nodeDelete);
+    }
+    return nilai;
 }
 
 void printListKota (kota *first) {

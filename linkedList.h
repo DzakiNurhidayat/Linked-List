@@ -31,6 +31,9 @@ void insertTengahKota (char nilai[], char cari[], kota **first);
 // Insert Anggota
 void insertAwalAnggota (char nilai[], infotype usia, kota *cariKota);
 
+// Delete Anggota
+char* deleteAnggota (char nodeHapus[], kota *cariKota);
+
 // Print List
 void printListKota (kota *first);
 void printListAnggota (kota *cariKota);
