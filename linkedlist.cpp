@@ -1,5 +1,14 @@
+/*----------------------------------------------------------------------------*/
+/* Dibuat oleh : Muhammad Dzaki Nurhidayat dan Muhammad Fachry Khariansyah */
+/* Dengan NIM  : 231511083 dan 231511084*/
+/* Deskripsi   : ADT Non Restricted Single Linked List */
+/* Tanggal     : 02-04-2024 */
+/*----------------------------------------------------------------------------*/
+
 #include "linkedList.h"
 
+
+// Dibuat Oleh M. Dzaki
 void cekAlokasiKota (char nilai[], kota **newNode) {
     *newNode = (kota *) malloc(sizeof(kota));
     if (*newNode == NULL) {
@@ -11,6 +20,8 @@ void cekAlokasiKota (char nilai[], kota **newNode) {
     }
 }
 
+
+// Dibuat Oleh M. Dzaki
 void cekAlokasiAnggota (char nilai[], infotype usia, anggota **newNode) {
     *newNode = (anggota *) malloc(sizeof(anggota));
     if (*newNode == NULL) {
@@ -22,6 +33,7 @@ void cekAlokasiAnggota (char nilai[], infotype usia, anggota **newNode) {
     }
 }
 
+// Dibuat Oleh M. Fachry
 void insertAwalKota (char nilai[], kota **first) {
     kota *newNode;
     cekAlokasiKota(nilai, &newNode);
@@ -33,6 +45,7 @@ void insertAwalKota (char nilai[], kota **first) {
     *first = newNode;
 }
 
+// Dibuat Oleh M. Fachry
 void insertAkhirKota (char nilai[], kota **first) {
     kota *newNode, *temp;
     cekAlokasiKota(nilai, &newNode);
@@ -48,6 +61,7 @@ void insertAkhirKota (char nilai[], kota **first) {
     }
 }
 
+// Dibuat Oleh M. Dzaki
 kota* searchingKota(char cari[], kota *first) {
     kota *temp;
     temp = first;
@@ -61,6 +75,7 @@ kota* searchingKota(char cari[], kota *first) {
     return NULL;
 }
 
+// Dibuat Oleh M. Fachry
 void insertTengahKota (char nilai[], char cari[], kota **first) {
     kota *newNode, *temp;
     cekAlokasiKota(nilai, &newNode);
@@ -80,6 +95,8 @@ void insertTengahKota (char nilai[], char cari[], kota **first) {
     }
 }
 
+// Dibuat Oleh M. Fachry
+// Ini merupakan Modul Insert yang sudah menerapkan ascending ordering
 void insertKota(char nilai[], kota **first) {
     kota *newNode, *temp, *temp2;
     cekAlokasiKota(nilai, &newNode);
@@ -97,6 +114,7 @@ void insertKota(char nilai[], kota **first) {
     }
 }
 
+// Dibuat Oleh M. Dzaki
 anggota* searchingAnggota (char cari[], kota *cariKota) {
     anggota *temp;
     temp = cariKota->np;
@@ -111,6 +129,27 @@ anggota* searchingAnggota (char cari[], kota *cariKota) {
     return NULL;
 }
 
+// Dibuat Oleh M. Dzaki
+bool cariAnggota (char cari[], kota *first) {
+    kota *temp;
+    anggota *temp2;
+    temp = first;
+    int i = 1;
+    bool cek = false;
+    printf("Data %s Ditemukan : ", cari);
+    while (temp != NULL) {
+        temp2 = searchingAnggota (cari, temp);
+        if (temp2 != NULL) {
+            printf("\n%d. %s", i, temp->info);
+            cek = true;
+            i++;
+        }
+        temp = temp->nk;
+    }
+    return cek;
+}
+
+// Dibuat Oleh M. Fachry
 void insertAwalAnggota (char nilai[], infotype usia, kota *cariKota) {
     anggota *newNode, *temp;
     cekAlokasiAnggota(nilai, usia, &newNode);
@@ -123,6 +162,7 @@ void insertAwalAnggota (char nilai[], infotype usia, kota *cariKota) {
     }
 }
 
+// Dibuat Oleh M. Dzaki
 char* deleteAnggota (char nodeHapus[], kota *cariKota) {
     anggota *temp, *nodeDelete;
     char *nilai = (char*)malloc(sizeof(char) * 100);
@@ -154,12 +194,15 @@ char* deleteAnggota (char nodeHapus[], kota *cariKota) {
     return nilai;
 }
 
-void printListKota (kota *first) {
+// Dibuat Oleh M. Dzaki
+bool printListKota (kota *first) {
     kota *temp;
+    bool cek = false;
     int i = 1;
     temp = first;
     if (temp != NULL)
     {
+        cek = true;
         while (temp->nk != NULL)
         {
             printf("%d. %s\n", i, temp->info);
@@ -172,14 +215,18 @@ void printListKota (kota *first) {
     {
         printf("List Kota kosong\n");
     }
+    return cek;
 }
 
-void printListAnggota (kota *cariKota) {
+// Dibuat Oleh M. Dzaki
+bool printListAnggota (kota *cariKota) {
     anggota *temp;
+    bool cek = false;
     temp = cariKota->np;
-    printf("%s -> ", cariKota->info);
+    printf("%s = ", cariKota->info);
     if (temp != NULL)
     {
+        cek = true;
         while (temp->next != NULL)
         {
             printf("%s -> ", temp->info);
@@ -188,8 +235,10 @@ void printListAnggota (kota *cariKota) {
         printf("%s -> ", temp->info);
     }
     printf("NULL\n");
+    return cek;
 }
 
+// Dibuat Oleh M. Fachry
 int jumlahKota (kota *first)
 {
     kota *temp;
@@ -203,3 +252,100 @@ int jumlahKota (kota *first)
     }
     return jumlahKota;
 }
+
+int jumlahAnggota (kota *cariKota) {
+    anggota *temp;
+    int jumlah;
+    temp = cariKota->np;
+    jumlah = 0;
+    while (temp != NULL)
+    {
+        temp = temp->next;
+        jumlah++;
+    }
+    return jumlah;
+}
+
+int jumlahTotal (kota *first) {
+    kota *temp;
+    int total;
+    temp = first;
+    total = 0;
+    while (temp != NULL)
+    {
+        total = total + jumlahAnggota(temp);
+        temp = temp->nk;
+    }
+    return total;
+}
+
+// anggota* cekUmur (kota *cariKota) {
+//     anggota *temp, *anggotaMuda, *anggotaTua;
+//     int umurMuda, umurTua;
+    
+//     temp = cariKota->np;
+//     anggotaMuda, anggotaTua = temp;
+//     umurMuda, umurTua = temp->usia;
+//     while (temp != NULL)
+//     {
+//         if (/* condition */)
+//         {
+//             /* code */
+//         }
+        
+//     }
+    
+// }
+
+// anggota* umurTermuda (kota *cariKota) {
+//     anggota *temp;
+//     int umurMuda;
+//     temp = cariKota->np;
+//     umurMuda = temp->usia;
+//     while (temp != NULL)
+//     {
+//         if (umurMuda > temp->usia)
+//         {
+//             umurMuda = temp->usia;
+//         }
+//         temp = temp->next;
+//     }
+//     return umurMuda;
+// }
+
+// anggota* umurTertua (kota *cariKota) {
+//     anggota *temp;
+//     int umurTua;
+//     temp = cariKota->np;
+//     umurTua = temp->usia;
+//     while (temp != NULL)
+//     {
+//         if (umurTua < temp->usia)
+//         {
+//             umurTua = temp->usia;
+//         }
+//         temp = temp->next;
+//     }
+//     return umurTua;
+// }
+
+// void infoUmurSemua (kota *first) {
+//     kota *temp;
+//     anggota *temp2;
+//     int umurMuda, umurTua;
+//     temp = first;
+//     while (temp != NULL)
+//     {
+//         if (umurMuda > umurTermuda(temp))
+//         {
+//             umurMuda = umurTermuda(temp);
+//         }
+//         if (umurTua < umurTertua(temp))
+//         {
+//             umurTua = umurTertua(temp);
+//         }
+//         temp = temp->nk;
+//     }
+//     printf("Umur termuda : %d (Anggota)")
+// }
+
